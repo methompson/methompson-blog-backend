@@ -1,12 +1,15 @@
 import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import Koa from 'koa';
 
 async function bootstrap() {
   const port = 8000;
-  const app = await NestFactory.create(AppModule);
-  app.enableCors();
-  await app.listen(port);
+
+  const app = new Koa();
+  app.use(async (ctx) => {
+    ctx.body = 'hello, world';
+  });
+
+  app.listen(port);
 
   console.log(`Listening on port ${port}`);
 }
